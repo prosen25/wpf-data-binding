@@ -22,22 +22,29 @@ namespace WPFDemo
     /// </summary>
     public partial class MainWindow : Window
     {
-        Person person = new Person
+        public List<Person> people = new List<Person>
         {
-            Name = "Jack",
-            Age = 30
+            new Person{Name = "Peter", Age = 30},
+            new Person{Name = "Maria", Age = 20},
+            new Person{Name = "Jack", Age = 35},
+            new Person{Name = "Marc", Age = 40},
+            new Person{Name = "Scott", Age = 27},
         };
         public MainWindow()
         {
             InitializeComponent();
 
-            this.DataContext = person;
+            ListBoxPeople.ItemsSource = people;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ShowSelectedButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            MessageBox.Show($"{person.Name} is {person.Age} years old");
+            var selectedPersons = ListBoxPeople.SelectedItems;
+            foreach (var item in selectedPersons)
+            {
+                Person person = (Person)item;
+                MessageBox.Show($"Name: {person.Name}, Age: {person.Age}");
+            }
         }
     }
 
